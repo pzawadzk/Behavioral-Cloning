@@ -1,4 +1,5 @@
 import argparse
+from scipy.misc import imresize
 import base64
 import json
 
@@ -37,7 +38,12 @@ def telemetry(sid, data):
     imgString = data["image"]
     image = Image.open(BytesIO(base64.b64decode(imgString)))
     image_array = np.asarray(image)
-    transformed_image_array = image_array[None, :, :, :]/255.
+    image_array = image_array/255. - 0.5
+    #image_array = imresize(image_array, [80, 160])[20:, :]
+    image_array = imresize(image_array, [100, 200])[30:-10, :]
+
+    transformed_image_array = image_array[None, :, :, :]
+
     # This model currently assumes that the features of the model are just the images. Feel free to change this.
     steering_angle = float(model.predict(transformed_image_array, batch_size=1))
     # The driving model currently just outputs a constant throttle. Feel free to edit this.
