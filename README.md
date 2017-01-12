@@ -20,7 +20,7 @@ To prevent "bad beavhours" we recorad camera images and sterring angles . This a
 I repeat this procedure for both sides of the road. Total numbe of 300 data points were generated.  
 
 To smoothen the steering angles I also use generate sythetic data points using left and right camaras. 
-In addition to using central camera I aslo use right camera :
+When 5 \deg 
 
 `df_edges_right.loc[:, 'center'] = df_edges_right.apply( lambda x: x.right[26:], axis=1)`
 
