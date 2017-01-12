@@ -2,19 +2,19 @@
 
 This project implements a machine learning model for self-driving car in a simulator. The model uses road images taken by an on-board camera and predicts appropriate steering angle.  The model is trained using the so-called  behavioural cloning approach. 
 In behavioural cloning we create a set of behaviours that we want the model to reproduce and then train the model on them. 
-The most important behaviour for a self-driving car is to keep the car in the center of the road. To create such set of "good" behaviours we drive a car in the simulator keeping car in the center of the road and collect camera images and the corresponding steering angels.
-In addition to reproducing "good" behaviours  the model should also be able to prevent "bad" behaviours such as as driving off the road. To acomplish this we We To collecti 
+The most important behaviour for a self-driving car is to keep the car in the center of the road. To reproduce this behaviours we drive a car in the simulator keeping car in the center of the road and collect camera images and the corresponding steering angels.
+In addition to reproducing "good" behaviours the model should also be able to prevent "bad" behaviours such as as driving off the road. ...
 
 <img src="simulator.png" width="480" alt="Combined Image" />
 
 ## Model details 
 
-#### Data collections
+### Data collections
 
-#### Preprocessing
+### Preprocessing
 
 
-#### Model architecture 
+### Model architecture 
 
 - Layer 1:
 Convolutional (Input = 32x32x1. Output = 28x28x10)
