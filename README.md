@@ -19,8 +19,10 @@ To prevent "bad beavhours" we recorad camera images and sterring angles . This a
 3. Record camara images and steering angles (25 ${\textdegree}$) for about 1 second.
 I repeat this procedure for both sides of the road. Total numbe of 300 data points were generated.  
 
+<img src="center.jpg" width="480" alt="Combined Image" />
 To smoothen the steering angles I also use generate sythetic data points using left and right camaras. 
 When 5 \deg 
+<img src="left.jpg" width="480" alt="Combined Image" />
 
 `df_edges_right.loc[:, 'center'] = df_edges_right.apply( lambda x: x.right[26:], axis=1)`
 
