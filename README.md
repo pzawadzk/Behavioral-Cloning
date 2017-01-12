@@ -16,7 +16,7 @@ To reproduce this behaviours we drive a car in the simulator keeping car in the 
 To prevent "bad beavhours" we recorad camera images and sterring angles . This accomplisedh in two steps:
 1. Drive the car to the side of the road
 2. Steer wheels toward the center of the road
-3. Record camara images and steering angles (25 $^{\circ}$) for about 1 second.
+3. Record camara images and steering angles (25 ${\textdegree}$) for about 1 second.
 I repeat this procedure for both sides of the road. Total numbe of 300 data points were generated.  
 
 To smoothen the steering angles I also use generate sythetic data points using left and right camaras. 
