@@ -1,23 +1,27 @@
 # Behavioral cloning
 
-This project implements a machine learning model for self-driving car in a simulator. The model uses road images taken by an on-board camera and predicts appropriate steering angle.  The model is trained using the so-called  behavioural cloning approach. 
+This project implements a machine learning model for self-driving car in a simulator. The model uses road images taken by three on-board cameras and predicts appropriate steering angle.  The model is trained using the so-called  behavioural cloning approach. 
 In behavioural cloning we create a set of behaviours that we want the model to reproduce and then train the model on them. 
 The most important behaviour for a self-driving car is to keep the car in the center of the road. 
 In addition to reproducing "good" behaviours the model should also be able to prevent "bad" behaviours such as as driving off.
 
 <img src="simulator.png" width="480" alt="Combined Image" />
 
-## Model details 
+## Model details
 
 ### Data collections
 The most important behaviour for a self-driving car is to keep the car in the center of the road. 
-To reproduce this behaviours we drive a car in the simulator keeping car in the center of the road and collect camera images and the corresponding steering angels. Such 
+To reproduce this behaviours we drive a car in the simulator keeping car in the center of the road and collect camera images and the corresponding steering angels. Total number of 2000 data points were genrated.
 
 To prevent "bad beavhours" we recorad camera images and sterring angles . This accomplisedh in two steps:
 1. Drive the car to the side of the road
-2. Steer wheels toward the center of the road and record camara images for about 1 second.
+2. Steer wheels toward the center of the road
+3. Record camara images and steering angles (25 $\deg$) for about 1 second.
+I repeat this procedure for both sides of the road. Total numbe of 300 data points were generated.  
 
-In addition
+To smoothen the steering angles I also use generate sythetic data points using left and right camaras. 
+In addition to using central camera I aslo use right camera :
+
 `df_edges_right.loc[:, 'center'] = df_edges_right.apply( lambda x: x.right[26:], axis=1)`
 
 In addtion to smoothen the "potential well"
