@@ -1,26 +1,18 @@
-# behavioral-cloning
+# Behavioral cloning
 
-This project implements a machine learning model for self-driving car in a simulator. The model uses camera images of the road and predicts appropriate steering angle.  The overall approach is to use bahavioural cloning to trained the model.
-The first step is to create a set of "good behaviours" that we want the model to reproduce. In the context of self-driving car the most importnat good behaviour is driving in the center of the road.  Second we also need to prevent driving off the road.
+This project implements a machine learning model for self-driving car in a simulator. The model uses road images taken by an on-board camera and predicts appropriate steering angle.  The model is trained using the so-called  behavioural cloning approach. 
+In behavioural cloning we create a set of behaviours that we want the model to reproduce and then train the model on them. 
+The most important behaviour for a self-driving car is to keep the car in the center of the road. To create such set of "good" behaviours we drive a car in the simulator keeping car in the center of the road and collect camera images and the corresponding steering angels.
+In addition to reproducing "good" behaviours  the model should also be able to prevent "bad" behaviours such as as driving off the road. To acomplish this we We To collecti 
 
+## Model details 
 
-take a sereis of camara images and corepsdodning steering angles to train a convlutional nuearla netowerk. The trained model then can be used to generate new steering  angles. 
+#### Data collections
 
- and teach car how to recover from prevent "bad bahvaiours" that is driving off the road;
-
-Thus to create a training set for the model we drive the car in the simulator trying to keep the car in the center of the road and collect camara images and correpsonding steering angles. 
-
-1. Training set:
--  Driving car in a normall fashiotn that is tryting to keep it in the center of rooed. 
-- 
-- 
+#### Preprocessing
 
 
-There Is the solution design documented?
-
-The README thoroughly discusses the approach taken for deriving and designing a model architecture fit for solving the given problem.
-
-# Model architecture:
+#### Model architecture 
 
 - Layer 1:
 Convolutional (Input = 32x32x1. Output = 28x28x10)
