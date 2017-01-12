@@ -18,8 +18,7 @@ To prevent "bad beavhours" we recorad camera images and sterring angles . This a
 2. Steer wheels toward the center of the road and record camara images for about 1 second.
 
 In addition
-
-    `df_edges_right.loc[:, 'center'] = df_edges_right.apply( lambda x: x.right[26:], axis=1)`
+`df_edges_right.loc[:, 'center'] = df_edges_right.apply( lambda x: x.right[26:], axis=1)`
 
 In addtion to smoothen the "potential well"
 ### Preprocessing
