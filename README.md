@@ -1,9 +1,24 @@
 # behavioral-cloning
 
-Is the solution design documented?
+This project implements a machine learning model for self-driving car in a simulator. The model uses camera images of the road and predicts appropriate steering angle.  The overall approach is to use bahavioural cloning to trained the model.
+The first step is to create a set of "good behaviours" that we want the model to reproduce. In the context of self-driving car the most importnat good behaviour is driving in the center of the road.  Second we also need to prevent driving off the road.
+
+
+take a sereis of camara images and corepsdodning steering angles to train a convlutional nuearla netowerk. The trained model then can be used to generate new steering  angles. 
+
+ and teach car how to recover from prevent "bad bahvaiours" that is driving off the road;
+
+Thus to create a training set for the model we drive the car in the simulator trying to keep the car in the center of the road and collect camara images and correpsonding steering angles. 
+
+1. Training set:
+-  Driving car in a normall fashiotn that is tryting to keep it in the center of rooed. 
+- 
+- 
+
+
+There Is the solution design documented?
 
 The README thoroughly discusses the approach taken for deriving and designing a model architecture fit for solving the given problem.
-
 
 # Model architecture:
 
