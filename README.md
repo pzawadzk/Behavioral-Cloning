@@ -16,6 +16,10 @@ In behavioural cloning we create a set of behaviours that we want the model to r
 
 The most important behaviour for a self-driving car is to keep the car in the center of the road. 
 To reproduce this behaviours we drive a car in the simulator keeping it in the center of the road and collect camera images and the corresponding steering angles. Total number of 2000 data points were generated.
+<p>
+<img src="normal_center_example.jpg" width="480" alt="Combined Image" /> <br>
+    <em>Fig. 1. View from the central camaera when car is on shoulder.</em>
+</p>
 
 #### Recovery from shoulder
 In addition to recording "good behaviours" I also record behaviours necessary for the car to recover from the shoulder.
