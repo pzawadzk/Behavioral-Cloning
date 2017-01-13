@@ -1,6 +1,6 @@
 # Behavioral cloning
 
-This project implements a machine learning model for self-driving car in a simulator. The model uses road images taken by three on-board cameras and predicts appropriate steering angle.  The model is trained using the so-called  behavioural cloning approach. 
+This project implements a machine learning model for a self-driving car in the Udacity simulator. The model uses road images taken by three on-board cameras and predicts appropriate steering angle.  The model is trained using the so-called  behavioural cloning approach. 
 In behavioural cloning we create a set of behaviours that we want the model to reproduce and then train the model on them. 
 The most important behaviour for a self-driving car is to keep the car in the center of the road. 
 In addition to reproducing "good" behaviours the model should also be able to prevent "bad" behaviours such as as driving off.
@@ -10,11 +10,16 @@ In addition to reproducing "good" behaviours the model should also be able to pr
 ## Model details
 
 ### Data collections
+
+#### Driving  
+
 The most important behaviour for a self-driving car is to keep the car in the center of the road. 
 To reproduce this behaviours we drive a car in the simulator keeping it in the center of the road and collect camera images and the corresponding steering angels. Total number of 2000 data points were generated.
 
+#### Driving  
 In addition to recording "good behaviours" I also record behaviours necessary for the car to recover from being to close to the road site. 
 This is accomplished in three steps:
+
 1. Drive the car to the side of the road
 2. Steer wheels toward the center of the road
 3. Record camera images and steering angles (25 ${\textdegree}$) for about 1 second.
