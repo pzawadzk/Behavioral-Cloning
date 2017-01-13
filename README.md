@@ -23,8 +23,7 @@ This is accomplished in three steps:
 2. Steer wheels toward the center of the road
 3. Record camera images and steering angles (25 ${\textdegree}$) for about 1 second.
 <p>
-<img src="center_example.jpg" width="480" alt="Combined Image" />
-
+<img src="center_example.jpg" width="480" alt="Combined Image" /><br>
     <em>Fig. 2. View from the central camaare when car is on shoulder./em>
 </p>
 
