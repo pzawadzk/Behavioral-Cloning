@@ -59,30 +59,27 @@ Here, instead of collecting additional data I use left (right) camera image to a
  * Max Pooling: 2x2 
  * Dropout: 0.4
  * Relu Activation
-* Layer 3: Input: 200x100x3, Output: 28x98x24 
+* Layer 3: Input: 12x47x36, Output: 4x21x48
  * Convolutional: 5x5
  * Max Pooling: 2x2 
  * Dropout: 0.4
  * Relu Activation
-* Layer 4: Input: 200x100x3, Output: 28x98x24 
- * Convolutional: 5x5
- * Max Pooling: 2x2 
+* Layer 4: Input:  4x21x48, Output: 2x19x64
+ * Convolutional: 3x3
+ * Max Pooling: 1x1 
  * Dropout: 0.4
  * Relu Activation
-* Layer 2:  Input: 200x100x3, Output: 28x98x24 
- * Convolutional (Input = 14x14x10. Output = 10x10x24)
+* Layer 5: Input: 2432, Output: 1000
+ * Fully Connected: 1000 neurons
  * Relu Activation
- * Max Pooling (Input = 10x10x24. Output = 5x5x24)
-* Layer 3: Input: 200x100x3, Output: 28x98x24 
- * Fully Connected (Input = 600. Output = 200)
- * Max Pooling (Input = 10x10x24. Output = 5x5x24)
+* Layer 6: Input: 1000, Output: 100
+ * Fully Connected: 100 neurons
  * Relu Activation
- * Layer 4: Input: 200x100x3, Output: 28x98x24 
- * Fully Connected (Input = 200. Output = 100)
+* Layer 7: Input: 100, Output: 20
+ * Fully Connected: 20 neurons
  * Relu Activation
-* Layer 5: Input: 200x100x3, Output: 28x98x24 
-* Fully Connected (Input = 100. Output = 43)
-
+* Layer 8: Input: 20, Output: 1
+ * Fully Connected: 1 neuron
 
 
 Is the model architecture documented?
