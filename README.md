@@ -4,7 +4,7 @@ This project implements a machine learning model for a self-driving car in the U
 In behavioural cloning we create a set of behaviours that we want the model to reproduce such as driving in the middle of the road.  In addition to reproducing "good" behaviours the model should also be able to recover from "bad behaviours" such driving on the shoulder.
 
 <p>
-<img src="simulator.png" width="480" alt="Combined Image" />
+<img src="simulator.png" width="480" alt="Combined Image" /> <br>
     <em>Fig. 1. View from the central camaare when car is on shoulder.</em>
 </p>
 
@@ -50,14 +50,30 @@ Here, instead of collecting additional data I use left (right) camera image to a
 ### Model architecture 
 
 * Layer 1: Input: 200x100x3, Output: 28x98x24 
- * Convolutional
+ * Convolutional: 5x5
+ * Max Pooling: 2x2 
+ * Dropout: 0.4
  * Relu Activation
- * Max Pooling
-* - Layer 2:  Input: 200x100x3, Output: 28x98x24 
+* Layer 2: Input: 28x98x24 Output: 12x47x36 
+ * Convolutional: 5x5
+ * Max Pooling: 2x2 
+ * Dropout: 0.4
+ * Relu Activation
+* Layer 3: Input: 200x100x3, Output: 28x98x24 
+ * Convolutional: 5x5
+ * Max Pooling: 2x2 
+ * Dropout: 0.4
+ * Relu Activation
+* Layer 4: Input: 200x100x3, Output: 28x98x24 
+ * Convolutional: 5x5
+ * Max Pooling: 2x2 
+ * Dropout: 0.4
+ * Relu Activation
+* Layer 2:  Input: 200x100x3, Output: 28x98x24 
  * Convolutional (Input = 14x14x10. Output = 10x10x24)
  * Relu Activation
  * Max Pooling (Input = 10x10x24. Output = 5x5x24)
-* - Layer 3: Input: 200x100x3, Output: 28x98x24 
+* Layer 3: Input: 200x100x3, Output: 28x98x24 
  * Fully Connected (Input = 600. Output = 200)
  * Max Pooling (Input = 10x10x24. Output = 5x5x24)
  * Relu Activation
