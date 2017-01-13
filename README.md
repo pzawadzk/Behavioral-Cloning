@@ -11,17 +11,21 @@ In addition to reproducing "good" behaviours the model should also be able to pr
 
 ### Data collections
 The most important behaviour for a self-driving car is to keep the car in the center of the road. 
-To reproduce this behaviours we drive a car in the simulator keeping car in the center of the road and collect camera images and the corresponding steering angels. Total number of 2000 data points were genrated.
+To reproduce this behaviours we drive a car in the simulator keeping it in the center of the road and collect camera images and the corresponding steering angels. Total number of 2000 data points were generated.
 
-To prevent "bad beavhours" we recorad camera images and sterring angles . This accomplisedh in two steps:
+In addition to recording "good behaviours" I also record behaviours necessary for the car to recover from being to close to the road site. 
+This is accomplished in three steps:
 1. Drive the car to the side of the road
 2. Steer wheels toward the center of the road
-3. Record camara images and steering angles (25 ${\textdegree}$) for about 1 second.
-I repeat this procedure for both sides of the road. Total numbe of 300 data points were generated.  
+3. Record camera images and steering angles (25 ${\textdegree}$) for about 1 second.
 
 <img src="center_example.jpg" width="480" alt="Combined Image" />
+
+I repeat this procedure for both sides of the road. Total number of 300 data points were generated.  
+
 To smoothen the steering angles I also use generate sythetic data points using left and right camaras. 
 When 5 \deg 
+
 <img src="left_example.jpg" width="480" alt="Combined Image" />
 
 `df_edges_right.loc[:, 'center'] = df_edges_right.apply( lambda x: x.right[26:], axis=1)`
