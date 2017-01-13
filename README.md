@@ -49,24 +49,23 @@ Here, instead of collecting additional data I use left (right) camera image to a
 
 ### Model architecture 
 
-- Layer 1:
-Convolutional (Input = 32x32x1. Output = 28x28x10)
-Relu Activation
-Max Pooling (Input = 28x28x10. Output = 14x14x10)
-
-- Layer 2:
-Convolutional (Input = 14x14x10. Output = 10x10x24)
-Relu Activation
-Max Pooling (Input = 10x10x24. Output = 5x5x24)
-
-- Layer 3:
-Fully Connected (Input = 600. Output = 200)
-Relu Activation
-Layer 4:
-Fully Connected (Input = 200. Output = 100)
-Relu Activation
-Layer 5:
-Fully Connected (Input = 100. Output = 43)
+* Layer 1: Input: 200x100x3, Output: 28x98x24 
+ * Convolutional
+ * Relu Activation
+ * Max Pooling
+* - Layer 2:  Input: 200x100x3, Output: 28x98x24 
+ * Convolutional (Input = 14x14x10. Output = 10x10x24)
+ * Relu Activation
+ * Max Pooling (Input = 10x10x24. Output = 5x5x24)
+* - Layer 3: Input: 200x100x3, Output: 28x98x24 
+ * Fully Connected (Input = 600. Output = 200)
+ * Max Pooling (Input = 10x10x24. Output = 5x5x24)
+ * Relu Activation
+ * Layer 4: Input: 200x100x3, Output: 28x98x24 
+ * Fully Connected (Input = 200. Output = 100)
+ * Relu Activation
+* Layer 5: Input: 200x100x3, Output: 28x98x24 
+* Fully Connected (Input = 100. Output = 43)
 
 
 
