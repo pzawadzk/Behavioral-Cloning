@@ -43,7 +43,9 @@ Here, instead of collecting additional data I use left (right) camera image to a
 </p>
 
 ### Preprocessing
-
+1. Normalize image data to [-0.5, 0.5] range
+2. Resize from 320x160 px to 200x100 px
+3. Crop to 200x60 px 
 
 ### Model architecture 
 
