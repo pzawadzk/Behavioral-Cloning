@@ -1,10 +1,12 @@
 # Behavioral cloning
 
-This project implements a machine learning model for a self-driving car in the Udacity simulator. The model uses road images taken by three on-board cameras and predicts appropriate steering angle.  The model is trained using the so-called  behavioural cloning approach. 
+This project implements a machine learning model for a self-driving car in the Udacity simulator (Fig. 1). The model uses road images taken by three on-board cameras and predicts appropriate steering angle.  The model is trained using the so-called  behavioural cloning approach. 
 In behavioural cloning we create a set of behaviours that we want the model to reproduce such as driving in the middle of the road.  In addition to reproducing "good" behaviours the model should also be able to recover from "bad behaviours" such driving on the shoulder.
 
+<p>
 <img src="simulator.png" width="480" alt="Combined Image" />
-
+    <em>Fig. 1. View from the central camaare when car is on shoulder.</em>
+</p>
 
 ## Model details
 
@@ -16,23 +18,28 @@ The most important behaviour for a self-driving car is to keep the car in the ce
 To reproduce this behaviours we drive a car in the simulator keeping it in the center of the road and collect camera images and the corresponding steering angels. Total number of 2000 data points were generated.
 
 #### Recovery from shoulder
+##### sadf
 In addition to recording "good behaviours" I also record behaviours necessary for the car to recover from the shoulder.
 This is accomplished in three steps:
 
 1. Drive the car to the side of the road
 2. Steer wheels toward the center of the road
-3. Record camera images and steering angles (25 ${\textdegree}$) for about 1 second.
+3. Record camera images (Fig. 2) and steering angles (25 ${\textdegree}$) for about 1 second.
 <p>
-<img src="center_example.jpg" width="480" alt="Combined Image" /><br>
-    <em>Fig. 2. View from the central camaare when car is on shoulder./em>
+<img src="center_example.jpg" width="480" alt="Combined Image" /> <br>
+    <em>Fig. 2. View from the central camaare when car is on shoulder.</em>
 </p>
 
 I repeat this procedure for both sides of the road. Total number of 300 data points were generated.  
 
-To smoothen the steering angles I also use generate sythetic data points using left and right camaras. 
+##### Synthetic data
+To smoothen the steering angles I also use generate synthetic data points using left and right camaras. 
 When 5 \deg 
-
+<p>
 <img src="left_example.jpg" width="480" alt="Combined Image" />
+    <em>Fig. 3. View from the central camaare when car is on shoulder.</em>
+</p>
+
 
 `df_edges_right.loc[:, 'center'] = df_edges_right.apply( lambda x: x.right[26:], axis=1)`
 
