@@ -15,35 +15,33 @@ In behavioural cloning we create a set of behaviours that we want the model to r
 #### Normal driving
 
 The most important behaviour for a self-driving car is to keep the car in the center of the road. 
-To reproduce this behaviours we drive a car in the simulator keeping it in the center of the road and collect camera images and the corresponding steering angels. Total number of 2000 data points were generated.
+To reproduce this behaviours we drive a car in the simulator keeping it in the center of the road and collect camera images and the corresponding steering angles. Total number of 2000 data points were generated.
 
 #### Recovery from shoulder
-##### sadf
 In addition to recording "good behaviours" I also record behaviours necessary for the car to recover from the shoulder.
 This is accomplished in three steps:
 
-1. Drive the car to the side of the road
+1. Drive the car to the shoulder 
 2. Steer wheels toward the center of the road
-3. Record camera images (Fig. 2) and steering angles (25 ${\textdegree}$) for about 1 second.
+3. Record camera images (Fig. 2) and steering angles of 25 ${\textdegree}$ for about 1 second at low speed (about 1 mph).
+
+Total number of 300 data points were generated for left and right shoulders.
 <p>
 <img src="center_example.jpg" width="480" alt="Combined Image" /> <br>
     <em>Fig. 2. View from the central camaare when car is on shoulder.</em>
 </p>
 
-I repeat this procedure for both sides of the road. Total number of 300 data points were generated.  
-
 ##### Synthetic data
-To smoothen the steering angles I also use generate synthetic data points using left and right camaras. 
-When 5 \deg 
+To improve the recovery and smoothen the self-driving I supplement the recovery data set with synthetic data points.
+The underling idea is that the closer the car is to the shoulder the larger steering angle (absolute value) needs to be for the car to recover.
+One way to generate such data set would be repeat steps 1-3 with car slightly away from the shoulder and use a low steering angle.
+Here, instead of collecting additional data I use left (right) camera image to approximate central camera image of car being close to right (left) shoulder.  Fig. 3 shows a view from the left camera when the car is on the right shoulder. After cropping the bottom of the image, the left camera image is a good approximation of the central camera image.
+
 <p>
-<img src="left_example.jpg" width="480" alt="Combined Image" />
+<img src="left_example.jpg" width="480" alt="Combined Image" /> <br>
     <em>Fig. 3. View from the central camaare when car is on shoulder.</em>
 </p>
 
-
-`df_edges_right.loc[:, 'center'] = df_edges_right.apply( lambda x: x.right[26:], axis=1)`
-
-In addtion to smoothen the "potential well"
 ### Preprocessing
 
 
