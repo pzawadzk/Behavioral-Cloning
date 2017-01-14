@@ -25,13 +25,13 @@ To reproduce a normal driving behaviour I drive a car in the simulator keeping i
 </p>
 
 #### Recovery from shoulder
-To record behaviours necessary for the car to recover from the shoulder:
+To record behaviours necessary for the car to recover from the shoulder I:
 
-1. Drive the car to the shoulder 
-2. Steer wheels toward the center of the road
+1. Drive the car to the shoulder; 
+2. Steer wheels toward the center of the road;
 3. Record camera images (Fig. 2) and steering angles of 25 ${\textdegree}$ for about 1 second at low speed (about 1 mph).
 
-Total number of 300 data points were generated for left and right shoulders.
+Total number of 300 data points were generated for the left and the right raod sides.
 <p>
 <img src="center_example.jpg" width="480" alt="Combined Image" /> <br>
     <em>Fig. 2. View from the central camaare when car is on shoulder.</em>
@@ -39,9 +39,9 @@ Total number of 300 data points were generated for left and right shoulders.
 
 ##### Synthetic data
 To improve the recovery and smoothen the self-driving I supplement the recovery data set with synthetic data points.
-The underling idea is that the closer the car is to the shoulder the larger steering angle (absolute value) needs to be for the car to recover.
-One way to generate such data set would be repeat steps 1-3 with car slightly away from the shoulder and use a low steering angle.
-Here, instead of collecting additional data I use left (right) camera image to approximate central camera image of car being close to right (left) shoulder.  Fig. 3 shows a view from the left camera when the car is on the right shoulder. After cropping the bottom of the image, the left camera image is a good approximation of the central camera image.
+The underling idea is that the further the car is from the shoulder the lower steering angle (absolute value) it needs to recover to the middle of the line.
+One way to generate such data set would be repeat steps 1-3 with the car slightly away from the shoulder and use a low steering angle.
+Here, instead of collecting additional data, I use left (right) camera image to approximate central camera image of the car being close to right (left) shoulder.  Fig. 3 shows an example  from the left camera when the car is on the right shoulder.
 
 <p>
 <img src="left_example.jpg" width="480" alt="Combined Image" /> <br>
@@ -55,43 +55,12 @@ Here, instead of collecting additional data I use left (right) camera image to a
 
 ### Model architecture 
 
-* Layer 1: Input: 200x100x3, Output: 28x98x24 
- * Convolutional: 5x5
- * Max Pooling: 2x2 
- * Dropout: 0.4
- * Relu Activation
-* Layer 2: Input: 28x98x24 Output: 12x47x36 
- * Convolutional: 5x5
- * Max Pooling: 2x2 
- * Dropout: 0.4
- * Relu Activation
-* Layer 3: Input: 12x47x36, Output: 4x21x48
- * Convolutional: 5x5
- * Max Pooling: 2x2 
- * Dropout: 0.4
- * Relu Activation
-* Layer 4: Input:  4x21x48, Output: 2x19x64
- * Convolutional: 3x3
- * Max Pooling: 1x1 
- * Dropout: 0.4
- * Relu Activation
-* Layer 5: Input: 2432, Output: 1000
- * Fully Connected: 1000 neurons
- * Relu Activation
-* Layer 6: Input: 1000, Output: 100
- * Fully Connected: 100 neurons
- * Relu Activation
-* Layer 7: Input: 100, Output: 20
- * Fully Connected: 20 neurons
- * Relu Activation
-* Layer 8: Input: 20, Output: 1
- * Fully Connected: 1 neuron
+* Layer 1: Input: 200x100x3, Output: 28x98x24, Convolutional: 5x5, Max Pooling: 2x2,  Dropout: 0.4,  Relu Activation
+* Layer 2: Input: 28x98x24 Output: 12x47x36, Convolutional: 5x5, Max Pooling: 2x2,  Dropout: 0.4,  Relu Activation
+* Layer 3: Input: 12x47x36, Output: 4x21x48, Convolutional: 5x5, Max Pooling: 2x2,  Dropout: 0.4,  Relu Activation
+* Layer 4: Input: 4x21x48, Output: 2x19x6, Convolutional: 3x3, Max Pooling: 1x1,  Dropout: 0.4,  Relu Activation4
+* Layer 5: Input: 2432, Output: 1000, Fully Connected: 1000 neurons, Relu Activation
+* Layer 6: Input: 1000, Output: 100, Fully Connected: 100 neurons, Relu Activation
+* Layer 7: Input: 100, Output: 20, Fully Connected: 20 neurons, Relu Activation
+* Layer 8: Input: 20, Output: 1, Fully Connected: 1 neuron,
 
-
-Is the model architecture documented?
-
-The README provides sufficient details of the characteristics and qualities of the architecture, such as the type of model used, the number of layers, the size of each layer. Visualizations emphasizing particular qualities of the architecture are encouraged.
-
-Is the creation of the training dataset and training process documented?
-
-The README describes how the model was trained and what the characteristics of the dataset are. Information such as how the dataset was generated and examples of images from the dataset should be included.
