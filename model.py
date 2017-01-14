@@ -78,7 +78,7 @@ def data_generator(df, batch_size=32):
 
 
 def conv_model(train, Xy_valid, dropout=0.4, nb_epoch=4, fname=False, model=None):
-    """Run convolution's neural network and safe the model to json file
+    """Run convolutional neural network and save the model to a json file
        and model paraders to h5 file.
 
        Keyword arguments:
@@ -119,7 +119,7 @@ def conv_model(train, Xy_valid, dropout=0.4, nb_epoch=4, fname=False, model=None
         
         model.add(Flatten())
 
-        # Three Convolution's layer 3
+        # Three fully connected layers
         model.add(Dense(1000, init='normal',
                         activation='relu', W_constraint=maxnorm(3)))
         model.add(Dense(100, init='normal',
@@ -139,27 +139,28 @@ def conv_model(train, Xy_valid, dropout=0.4, nb_epoch=4, fname=False, model=None
     if fname == '':
         fname = 'model'
 
+    # Save model and parameters
     model.save_weights('%s.h5' % fname)
     model_json = model.to_json()
     with open("%s.json" % fname, "w") as json_file:
         json_file.write(model_json)
+
     return model, history
 
 def main(_):
-    # Load the driving log data
-    # df_mid: car centered
+    # Load driving log data
+    # Normal driving
     df_mid = pd.read_csv('data/driving_log.csv')
-    # df_edges: car centered
+
+    # Recovery
     df_edges = pd.read_csv('edges/driving_log.csv', names=df_mid.columns)
 
-    #
+    # Synthetic data 
     df_edges_left = df_edges[df_edges.steering > 0]
     df_edges_right = df_edges[df_edges.steering < 0]
-    #
     df_edges_left.steering = 0.2
     df_edges_right.steering = -0.2
 
-    # Remove paths to camera images
     df_edges.loc[:, 'center'] = df_edges.apply(
         lambda x: x.center[25:], axis=1)
     df_edges_right.loc[:, 'center'] = df_edges_right.apply(

@@ -38,8 +38,8 @@ def telemetry(sid, data):
     imgString = data["image"]
     image = Image.open(BytesIO(base64.b64decode(imgString)))
     image_array = np.asarray(image)
+    # Pre-process data
     image_array = image_array/255. - 0.5
-    #image_array = imresize(image_array, [80, 160])[20:, :]
     image_array = imresize(image_array, [100, 200])[30:-10, :]
 
     transformed_image_array = image_array[None, :, :, :]
