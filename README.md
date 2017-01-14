@@ -28,7 +28,7 @@ To record behaviours necessary for the car to recover from the shoulder I:
 
 1. Drive the car to the shoulder; 
 2. Steer wheels toward the center of the road;
-3. Record camera images (Fig. 2) for about 1 second at low speed (about 1 mph) and assign a steering angles of 25 &deg;. 
+3. Record camera images (Fig. 2) for about 1 second at low speed (about 1 mph) and assign a steering angles of 25&deg;. 
 
 <p>
 <img src="center_example.jpg" width="480" alt="Combined Image" /> <br>
@@ -39,11 +39,11 @@ To record behaviours necessary for the car to recover from the shoulder I:
 To improve the recovery and smoothen self-driving I supplement the recovery data set with synthetic data points.
 The underling idea is that the further the car is from the shoulder the lower steering angle needs to be for the car to recover to the middle of the road.
 One way to generate such data set would be repeat steps 1-3 with the car slightly away from the shoulder and use a lower steering angle.
-Here, instead of collecting additional data, I use left (right) camera image to approximate central camera image when the is close to the right (left) shoulder.  Fig. 3 shows an example from the left camera when the car is on the right shoulder.
+Here, instead of collecting additional data, I use left (right) camera image to approximate central camera image when the car is close to the right (left) shoulder.  Fig. 3 shows an example from the left camera when the car is on the right shoulder.
 
 <p>
 <img src="left_example.jpg" width="480" alt="Combined Image" /> <br>
-    <em>Fig. 3. View from the left camara when the car is on the right shoulder.</em>
+    <em>Fig. 3. View from the left camera when the car is on the right shoulder.</em>
 </p>
 
 ### Preprocessing
