@@ -12,8 +12,16 @@ from keras.layers import Dense, Input, Activation
 from keras.layers import Dropout, MaxPooling2D, Conv2D, Flatten
 from keras.optimizers import SGD
 from keras.constraints import maxnorm
+import tensorflow as tf
 
-PREP = False
+flags = tf.app.flags
+FLAGS = flags.FLAGS
+
+flags.DEFINE_boolean('prep', False, 'If True preproces data')
+flags.DEFINE_string('fname', 'model', 'Filename for saving model')
+flags.DEFINE_integer('dropout', 0.4, 'Minibatch size.')
+flags.DEFINE_integer('nb_epochs', 10, 'Number of epochs.')
+
 
 def convert_data(df, path='data/'):
     """Pre-process camera images and save as numpy arrays.
@@ -137,8 +145,7 @@ def conv_model(dropout=0.4, nb_epoch=4, fname=False, model=None):
         json_file.write(model_json)
     return model, history
 
-if __name__ == '__main__':
-
+def main(_):
     # Load the driving log data
     # df_mid: car centered
     df_mid = pd.read_csv('data/driving_log.csv')
@@ -161,7 +168,7 @@ if __name__ == '__main__':
         lambda x: x.left[26:], axis=1)
 
     # Pre-process the data
-    if PREP: 
+    if FLAGS.prep: 
         convert_data(df_edges, 'edges/')
         convert_data(df_edges_left, 'edges/')
         convert_data(df_edges_right, 'edges/')
@@ -184,10 +191,13 @@ if __name__ == '__main__':
     # Load validation data
     Xy_valid = get_data(valid)
     # Train the network
-    model, history = conv_model(0.4, nb_epoch=6)
+    model, history = conv_model(FLAGS.dropout, nb_epoch=FLAGS.nb_epochs, fname=FLAGS.fname)
 
     # Load test data
     Xy_test = get_data(test)
     # Test accuracy
     mse = model.evaluate(Xy_test[0], Xy_test[1])
     print('Test MSE: %.3f' % mse)
+
+if __name__ == '__main__':
+    tf.app.run()

@@ -7,12 +7,11 @@ This project implements machine learning model for a self-driving car in the Uda
     <em>Fig. 1. View from the central camaare when car is on shoulder.</em>
 </p>
 
-## Model details
+## Data
 The goal of behavioural cloning is to reproduce human behaviours. For a self-driving car the two most important behaviours are:
 
 1. Normal driving i.e. drving in the middle of the lane 
 2. Recovery from mistakes such as driving on the shoulder
-
 
 ### Data collections
 
@@ -31,7 +30,7 @@ To record behaviours necessary for the car to recover from the shoulder I:
 2. Steer wheels toward the center of the road;
 3. Record camera images (Fig. 2) and steering angles of 25 ${\textdegree}$ for about 1 second at low speed (about 1 mph).
 
-Total number of 300 data points were generated for the left and the right raod sides.
+Total number of 300 data points were generated for the left and the right road sides.
 <p>
 <img src="center_example.jpg" width="480" alt="Combined Image" /> <br>
     <em>Fig. 2. View from the central camaare when car is on shoulder.</em>
@@ -53,14 +52,21 @@ Here, instead of collecting additional data, I use left (right) camera image to 
 2. Resize from 320x160 px to 200x100 px
 3. Crop to 200x60 px 
 
-### Model architecture 
+## Model architecture 
+
+The model architecture was inspired by the LeNet architecture and the [NVIDIA paper](http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf). A doropout was included in the convolutional layers to severe as a regularization parameter. The output layer is followed by hyperbolic tangent to limit steering angle predictions to [-1, 1] range.
 
 * Layer 1: Input: 200x100x3, Output: 28x98x24, Convolutional: 5x5, Max Pooling: 2x2,  Dropout: 0.4,  Relu Activation
 * Layer 2: Input: 28x98x24 Output: 12x47x36, Convolutional: 5x5, Max Pooling: 2x2,  Dropout: 0.4,  Relu Activation
 * Layer 3: Input: 12x47x36, Output: 4x21x48, Convolutional: 5x5, Max Pooling: 2x2,  Dropout: 0.4,  Relu Activation
-* Layer 4: Input: 4x21x48, Output: 2x19x6, Convolutional: 3x3, Max Pooling: 1x1,  Dropout: 0.4,  Relu Activation4
+* Layer 4: Input: 4x21x48, Output: 2x19x6, Convolutional: 3x3, Max Pooling: 1x1,  Dropout: 0.4,  Relu Activationn
 * Layer 5: Input: 2432, Output: 1000, Fully Connected: 1000 neurons, Relu Activation
 * Layer 6: Input: 1000, Output: 100, Fully Connected: 100 neurons, Relu Activation
 * Layer 7: Input: 100, Output: 20, Fully Connected: 20 neurons, Relu Activation
-* Layer 8: Input: 20, Output: 1, Fully Connected: 1 neuron,
+* Layer 8: Input: 20, Output: 1, Fully Connected: 1 neuron, tanh Activation 
 
+### Training procedure
+The model was trained on AWS EC2 g2.2xlarge instance. Dropout rate was varied to ensure model does not overfit.
+
+## Results
+The model performs well on both both tracks without crashing even after multiple loops.
