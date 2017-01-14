@@ -28,7 +28,7 @@ To record behaviours necessary for the car to recover from the shoulder I:
 
 1. Drive the car to the shoulder; 
 2. Steer wheels toward the center of the road;
-3. Record camera images (Fig. 2) for about 1 second at low speed (about 1 mph) and assign a steering angles of 25 $\text{\textdegree}$ 
+3. Record camera images (Fig. 2) for about 1 second at low speed (about 1 mph) and assign a steering angles of 25 &deg;. 
 
 <p>
 <img src="center_example.jpg" width="480" alt="Combined Image" /> <br>
