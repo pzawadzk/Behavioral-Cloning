@@ -1,7 +1,6 @@
 # Behavioral cloning
 
-This project implements a machine learning model for a self-driving car in the Udacity simulator (Fig. 1). The model uses road images taken by three on-board cameras and predicts appropriate steering angle.  The model is trained using the so-called  behavioural cloning approach. 
-In behavioural cloning we create a set of behaviours that we want the model to reproduce such as driving in the middle of the road.  In addition to reproducing "good" behaviours the model should also be able to recover from "bad behaviours" such driving on the shoulder.
+This project implements machine learning model for a self-driving car in the Udacity simulator (Fig. 1). The model uses road images taken by three on-board cameras to predict steering angle.  The model is trained using the so-called  behavioural cloning approach. 
 
 <p>
 <img src="simulator.png" width="480" alt="Combined Image" /> <br>
@@ -9,21 +8,24 @@ In behavioural cloning we create a set of behaviours that we want the model to r
 </p>
 
 ## Model details
+The goal of behavioural cloning is to reproduce human behaviours. For a self-driving car the two most important behaviours are:
+
+1. Normal driving i.e. drving in the middle of the lane 
+2. Recovery from mistakes such as driving on the shoulder
+
 
 ### Data collections
 
 #### Normal driving
 
-The most important behaviour for a self-driving car is to keep the car in the center of the road. 
-To reproduce this behaviours we drive a car in the simulator keeping it in the center of the road and collect camera images and the corresponding steering angles. Total number of 2000 data points were generated.
+To reproduce a normal driving behaviour I drive a car in the simulator keeping it in the center of the road and collect camera images and the corresponding steering angles. Total number of 2000 data points were generated.
 <p>
 <img src="normal_center_example.jpg" width="480" alt="Combined Image" /> <br>
     <em>Fig. 1. View from the central camaera when car is on shoulder.</em>
 </p>
 
 #### Recovery from shoulder
-In addition to recording "good behaviours" I also record behaviours necessary for the car to recover from the shoulder.
-This is accomplished in three steps:
+To record behaviours necessary for the car to recover from the shoulder:
 
 1. Drive the car to the shoulder 
 2. Steer wheels toward the center of the road
