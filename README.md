@@ -1,6 +1,6 @@
 # Behavioral cloning
 
-This project implements machine learning model for a self-driving car in the UDACITY simulator (Fig. 1). The model uses road images taken by three on-board cameras to predict steering angle.  The model is trained using the so-called  behavioural cloning approach. 
+This project implements a machine-learning model for a self-driving car in the UDACITY simulator (Fig. 1). The model uses road images taken by three on-board cameras to predict steering angle.  The model is trained using the so-called  behavioural cloning approach. 
 
 <p>
 <img src="simulator.png" width="480" alt="Combined Image" /> <br>
@@ -11,12 +11,12 @@ This project implements machine learning model for a self-driving car in the UDA
 The goal of behavioural cloning is to reproduce human behaviours in a computer program. For a self-driving car the two most important behaviours are:
 
 1. Normal driving i.e. driving in the middle of the lane;
-2. Recovery from mistakes such as driving on the shoulder.
+2. Recovery from mistakes e.g. driving on the shoulder.
 
 ### Data collections
 
 #### Normal driving
-To recored normal driving behaviours I drive a car in the simulator keeping it in the center of the road and collect camera images and the corresponding steering angles.
+To recored normal driving behaviours I drive the car in the simulator keeping it in the center of the road and collect camera images and the corresponding steering angles.
 
 <p>
 <img src="normal_center_example.jpg" width="480" alt="Combined Image" /> <br>
@@ -28,7 +28,7 @@ To record behaviours necessary for the car to recover from the shoulder I:
 
 1. Drive the car to the shoulder; 
 2. Steer wheels toward the center of the road;
-3. Record camera images (Fig. 2) and steering angles of 25 ${\textdegree}$ for about 1 second at low speed (about 1 mph).
+3. Record camera images (Fig. 2) for about 1 second at low speed (about 1 mph) and assign a steering angles of 25 $\text{\textdegree}$ 
 
 <p>
 <img src="center_example.jpg" width="480" alt="Combined Image" /> <br>
