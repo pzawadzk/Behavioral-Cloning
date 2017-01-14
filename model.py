@@ -77,7 +77,7 @@ def data_generator(df, batch_size=32):
             yield get_data(df.loc[start:end])
 
 
-def conv_model(dropout=0.4, nb_epoch=4, fname=False, model=None):
+def conv_model(train, Xy_valid, dropout=0.4, nb_epoch=4, fname=False, model=None):
     """Run convolution's neural network and safe the model to json file
        and model paraders to h5 file.
 
@@ -127,7 +127,7 @@ def conv_model(dropout=0.4, nb_epoch=4, fname=False, model=None):
         model.add(Dense(20, init='normal', activation='relu',
                         W_constraint=maxnorm(3)))
         # Output layer
-        model.add(Dense(1, init='normal'))
+        model.add(Dense(1, init='normal', activation='tanh'))
 
     model.summary()
 
@@ -191,7 +191,7 @@ def main(_):
     # Load validation data
     Xy_valid = get_data(valid)
     # Train the network
-    model, history = conv_model(FLAGS.dropout, nb_epoch=FLAGS.nb_epochs, fname=FLAGS.fname)
+    model, history = conv_model(train, Xy_valid, FLAGS.dropout, nb_epoch=FLAGS.nb_epochs, fname=FLAGS.fname)
 
     # Load test data
     Xy_test = get_data(test)

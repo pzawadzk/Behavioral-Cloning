@@ -63,10 +63,10 @@ The model architecture was inspired by the LeNet architecture and the [NVIDIA pa
 * Layer 5: Input: 2432, Output: 1000, Fully Connected: 1000 neurons, Relu Activation
 * Layer 6: Input: 1000, Output: 100, Fully Connected: 100 neurons, Relu Activation
 * Layer 7: Input: 100, Output: 20, Fully Connected: 20 neurons, Relu Activation
-* Layer 8: Input: 20, Output: 1, Fully Connected: 1 neuron, tanh Activation 
+* Layer 8: Input: 20, Output: 1, Fully Connected: 1 neuron, Tanh Activation 
 
 ### Training procedure
-The model was trained on AWS EC2 g2.2xlarge instance. Dropout rate was varied to ensure model does not overfit.
+The model was trained on AWS EC2 g2.2xlarge instance. Dropout rate was varied to ensure model does not overfit. Validation error converged after 5 epochs.
 
 ## Results
-The model performs well on both both tracks without crashing even after multiple loops.
+The model performs well in the simulator without crashing even after multiple loops.
