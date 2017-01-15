@@ -1,16 +1,14 @@
-import pickle
 import os
 import numpy as np
-from sklearn.model_selection import train_test_split
-import math
 import pandas as pd
+import math
 import PIL
 from PIL import Image
+from sklearn.model_selection import train_test_split
 from scipy.misc import imresize, toimage
 from keras.models import Sequential
 from keras.layers import Dense, Input, Activation
 from keras.layers import Dropout, MaxPooling2D, Conv2D, Flatten
-from keras.optimizers import SGD
 from keras.constraints import maxnorm
 import tensorflow as tf
 
