@@ -110,7 +110,6 @@ def conv_model(train, Xy_valid, dropout=0.4, nb_epoch=4, fname=False, model=None
 
         # Convolution's layer 4
         model.add(Conv2D(64, 3, 3))
-        model.add(MaxPooling2D((1, 1)))
         model.add((Dropout(dropout)))
         model.add(Activation('relu'))
         

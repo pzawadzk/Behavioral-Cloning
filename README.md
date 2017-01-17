@@ -46,26 +46,34 @@ Here, instead of collecting additional data, I use left (right) camera image to 
     <em>Fig. 3. View from the left camera when the car is on the right shoulder.</em>
 </p>
 
-### Preprocessing
-1. Normalize image data to [-0.5, 0.5] range
-2. Resize from 320x160 px to 200x100 px
-3. Crop to 200x60 px 
+## Model architecture design
+The model was inspired by 
+this [NVIDIA paper](http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf).
+The input image size, convolutional filter sizes and sizes of fully connected layers are the same as in the NVIDA paper.
+The only difference is that my architecture uses one less convolutional layer (the last 3x3 layer is dropped). 
 
-## Model architecture 
+Because, my training data set is three orders of magnitude smaller than the one used by the authors (~minutes vs 72 hours) over-fitting is an issue. To prevent over-fitting I introduce two regularization strategies:
+1. Each but the last convolutional layer is followed by a 2x2 MaxPool layer. To preserve the layers output sizes the stride in convolutional layers is reduced from two to one. 
+2. Each convolutional layer is followed by a dropout layer. 
 
-The model architecture was inspired by the LeNet architecture and the recommended [NVIDIA paper](http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf). A dropout was included in the convolutional layers to severe as a regularization parameter. The output layer is followed by hyperbolic tangent to limit steering angle predictions to [-1, 1] range.
+In addition to the above changes, the output layer is followed by hyperbolic tangent to limit steering angle predictions to [-1, 1] range.
 
+## Architecture characteristics
 * Layer 1: Input: 200x100x3, Output: 28x98x24, Convolutional: 5x5, Max Pooling: 2x2,  Dropout: 0.4,  Relu Activation
 * Layer 2: Input: 28x98x24 Output: 12x47x36, Convolutional: 5x5, Max Pooling: 2x2,  Dropout: 0.4,  Relu Activation
 * Layer 3: Input: 12x47x36, Output: 4x21x48, Convolutional: 5x5, Max Pooling: 2x2,  Dropout: 0.4,  Relu Activation
-* Layer 4: Input: 4x21x48, Output: 2x19x6, Convolutional: 3x3, Max Pooling: 1x1,  Dropout: 0.4,  Relu Activationn
+* Layer 4: Input: 4x21x48, Output: 2x19x64, Convolutional: 3x3, Dropout: 0.4,  Relu Activationn
 * Layer 5: Input: 2432, Output: 1000, Fully Connected: 1000 neurons, Relu Activation
 * Layer 6: Input: 1000, Output: 100, Fully Connected: 100 neurons, Relu Activation
 * Layer 7: Input: 100, Output: 20, Fully Connected: 20 neurons, Relu Activation
 * Layer 8: Input: 20, Output: 1, Fully Connected: 1 neuron, Tanh Activation 
 
-### Training procedure
-The model was trained on AWS EC2 g2.2xlarge instance. Dropout rate was varied to ensure model does not overfit the data. Validation error converged after 5 epochs.
+## Data Preprocessing
+1. Normalize image data to [-0.5, 0.5] range
+2. Resize from 320x160 px to 200x100 px
+3. Crop to 200x60 px 
 
-## Results
+## Model Training (Include hyperparameter tuning.)
+
+The model was trained on AWS EC2 g2.2xlarge instance. Dropout rate was varied to ensure model does not overfit the data. Validation error converged after 5 epochs.
 The model performs well in the simulator without crashing even after multiple loops.
