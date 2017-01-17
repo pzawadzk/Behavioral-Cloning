@@ -47,22 +47,23 @@ Here, instead of collecting additional data, I use left (right) camera image to 
 </p>
 
 ## Model architecture design
-My model was inspired by paper from [NVIDIA](http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf) [1] which describes a successful ConvNet architecture for training a self-driving car. I used the ConvNet model architecture described in this paper as a starting point.
-Compared the NVIDIA model, my model has one less convolutional layer and one less fully connected layer.
-Removing the last convolutional layer and one fully connected layer significantly speeded up training and lead to similar validation errors. 
+My model is inspired by a paper from [NVIDIA](http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf) [1] which describes a successful ConvNet architecture for training a self-driving car. I use this architecture as a starting point.
+Compared to the NVIDIA model, my model has one less convolutional layer and one less fully connected layer.
+Removing the last convolutional layer and one fully connected layer significantly speeds up the training and leads to similar validation errors. 
 The convolutional filter sizes and number of filters are the same as in the NVIDA paper.  The input image size is only slightly different than in the paper (200x60 vs 200x66 px).
 
-Because, my training data set is three orders of magnitude smaller than the one used by the authors (~minutes vs 72 hours) over-fitting is an issue. To prevent over-fitting I introduce two regularization strategies:
+Because my training data set is three orders of magnitude smaller than the one used by the authors (~minutes vs 72 hours) over-fitting is an issue. To prevent over-fitting I introduce two regularization strategies:
 
 1. All but the last convolutional layer are followed by a 2x2 MaxPool layer. To preserve the layers output sizes the stride in convolutional layers is reduced from two to one. 
 2. All convolutional layers are followed by a dropout layer. 
 
 In addition to the above changes, the output layer is followed by hyperbolic tangent to limit steering angle predictions to [-1, 1] range.
 
-Overall, the four convolutional layers followed by Relu activation should provide enough capability to extract translationaly invariant and non-linear features.
+Overall, four convolutional layers each followed by a relu activation should provide enough capability to extract translationaly invariant and non-linear features.
+Three fully connected layers, on the other hand, should effectively translate those features to steering angles. 
 
 ## Architecture characteristics
-The final architecture of the model ensures that the volumes are decreasing at each layer i.e. the capacity of a layer is no larger than the previous layer.
+The final model architecture ensures that the volumes are decreasing at each layer i.e.  information flows from the input to the output layer.
 
 * Layer 1: Input: 200x100x3, Output: 28x98x24, Convolutional: 5x5, Max Pooling: 2x2,  Dropout: 0.4,  Relu Activation
 * Layer 2: Input: 28x98x24 Output: 12x47x36, Convolutional: 5x5, Max Pooling: 2x2,  Dropout: 0.4,  Relu Activation
