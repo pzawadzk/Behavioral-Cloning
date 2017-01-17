@@ -47,19 +47,22 @@ Here, instead of collecting additional data, I use left (right) camera image to 
 </p>
 
 ## Model architecture design
-The model was inspired by 
-this [NVIDIA paper](http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf).
-The input image size, convolutional filter sizes and sizes of fully connected layers are the same as in the NVIDA paper.
-The only difference is that my architecture uses one less convolutional layer (the last 3x3 layer is dropped). 
+The model was inspired by paper from [NVIDIA](http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf) [1]. The paper describes a ConvNet model for self-driving car. I used the ConvNet model architecture described in this paper as a starting point.
+My model has four convolutional layers and three fully connected layers compared to five and four layers in the NVIDIA model, respectively.  I found that removing the last convolutional layer and one fully connected layer significantly speeds up training and leads to similar validation errors. 
+The convolutional filter sizes and number of filters are the same as in the NVIDA paper.  The input image size is only slighlty diffrent than in the paper (200x60 vs 200x66).
 
 Because, my training data set is three orders of magnitude smaller than the one used by the authors (~minutes vs 72 hours) over-fitting is an issue. To prevent over-fitting I introduce two regularization strategies:
 
-1. Each but the last convolutional layer is followed by a 2x2 MaxPool layer. To preserve the layers output sizes the stride in convolutional layers is reduced from two to one. 
-2. Each convolutional layer is followed by a dropout layer. 
+1. All but the last convolutional layer are followed by a 2x2 MaxPool layer. To preserve the layers output sizes the stride in convolutional layers is reduced from two to one. 
+2. All convolutional layers are followed by a dropout layer. 
 
 In addition to the above changes, the output layer is followed by hyperbolic tangent to limit steering angle predictions to [-1, 1] range.
 
+Overall, the four convolutional layers followed by Relu activation should provide enough capability to extract translationaly invariant and non-linear features.
+
 ## Architecture characteristics
+The final architecture of the model ensures that the volumes are decreasing at each layer i.e. the capacity of a layer is no larger than the previous layer.
+
 * Layer 1: Input: 200x100x3, Output: 28x98x24, Convolutional: 5x5, Max Pooling: 2x2,  Dropout: 0.4,  Relu Activation
 * Layer 2: Input: 28x98x24 Output: 12x47x36, Convolutional: 5x5, Max Pooling: 2x2,  Dropout: 0.4,  Relu Activation
 * Layer 3: Input: 12x47x36, Output: 4x21x48, Convolutional: 5x5, Max Pooling: 2x2,  Dropout: 0.4,  Relu Activation
@@ -72,9 +75,14 @@ In addition to the above changes, the output layer is followed by hyperbolic tan
 ## Data Preprocessing
 1. Normalize image data to [-0.5, 0.5] range
 2. Resize from 320x160 px to 200x100 px
-3. Crop to 200x60 px 
+3. Crop to 200x60 px. Here I remove part of the image that is above the horizon and not in front of the car.
 
-## Model Training (Include hyperparameter tuning.)
+## Model Training.
+To train the model I perform a grid search over two hyperparameters:  dropout and number of epochs.
+To evaluate model I test its performance in the simulator and choose parameters that lead to successful self-driving. The resulting dropout is 0.4 and number of epochs is 8. 
 
-The model was trained on AWS EC2 g2.2xlarge instance. Dropout rate was varied to ensure model does not overfit the data. Validation error converged after 5 epochs.
+I did not use validation set to evaluate the model performance because the data is strongly autocorrelated. Perhaps, better designed validation set , not a simple random sample of the train set could remove some of the autcorrelation and lead to validation errors that reflect car self-driving ability.
+
 The model performs well in the simulator without crashing even after multiple loops.
+
+[1] End to End Learning for Self-Driving Cars, NVIDA, 2016, [arXiv:1604.07316][https://arxiv.org/abs/1604.07316]
