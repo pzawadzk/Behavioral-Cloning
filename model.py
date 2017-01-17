@@ -17,9 +17,8 @@ FLAGS = flags.FLAGS
 
 flags.DEFINE_boolean('prep', False, 'If True preproces data')
 flags.DEFINE_string('fname', 'model', 'Filename for saving model')
-flags.DEFINE_integer('dropout', 0.4, 'Minibatch size.')
-flags.DEFINE_integer('nb_epochs', 10, 'Number of epochs.')
-
+flags.DEFINE_float('dropout', 0.4, 'Dropout')
+flags.DEFINE_integer('nb_epochs', 10, 'Number of epochs')
 
 def convert_data(df, path='data/'):
     """Pre-process camera images and save as numpy arrays.
