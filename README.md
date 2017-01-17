@@ -53,6 +53,7 @@ The input image size, convolutional filter sizes and sizes of fully connected la
 The only difference is that my architecture uses one less convolutional layer (the last 3x3 layer is dropped). 
 
 Because, my training data set is three orders of magnitude smaller than the one used by the authors (~minutes vs 72 hours) over-fitting is an issue. To prevent over-fitting I introduce two regularization strategies:
+
 1. Each but the last convolutional layer is followed by a 2x2 MaxPool layer. To preserve the layers output sizes the stride in convolutional layers is reduced from two to one. 
 2. Each convolutional layer is followed by a dropout layer. 
 
