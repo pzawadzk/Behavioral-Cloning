@@ -47,9 +47,10 @@ Here, instead of collecting additional data, I use left (right) camera image to 
 </p>
 
 ## Model architecture design
-The model was inspired by paper from [NVIDIA](http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf) [1]. The paper describes a ConvNet model for self-driving car. I used the ConvNet model architecture described in this paper as a starting point.
-My model has four convolutional layers and three fully connected layers compared to five and four layers in the NVIDIA model, respectively.  I found that removing the last convolutional layer and one fully connected layer significantly speeds up training and leads to similar validation errors. 
-The convolutional filter sizes and number of filters are the same as in the NVIDA paper.  The input image size is only slighlty diffrent than in the paper (200x60 vs 200x66).
+My model was inspired by paper from [NVIDIA](http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf) [1] which describes a successful ConvNet architecture for training a self-driving car. I used the ConvNet model architecture described in this paper as a starting point.
+Compared the NVIDIA model, my model has one less convolutional layer and one less fully connected layer.
+Removing the last convolutional layer and one fully connected layer significantly speeded up training and lead to similar validation errors. 
+The convolutional filter sizes and number of filters are the same as in the NVIDA paper.  The input image size is only slightly different than in the paper (200x60 vs 200x66 px).
 
 Because, my training data set is three orders of magnitude smaller than the one used by the authors (~minutes vs 72 hours) over-fitting is an issue. To prevent over-fitting I introduce two regularization strategies:
 
