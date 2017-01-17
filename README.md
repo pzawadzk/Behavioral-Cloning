@@ -50,11 +50,11 @@ Here, instead of collecting additional data, I use left (right) camera image to 
 My model is inspired by a paper from [NVIDIA](http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf) [1] which describes a successful ConvNet architecture for training a self-driving car. I use this architecture as a starting point.
 Compared to the NVIDIA model, my model has one less convolutional layer and one less fully connected layer.
 Removing the last convolutional layer and one fully connected layer significantly speeds up the training and leads to similar validation errors. 
-The convolutional filter sizes and number of filters are the same as in the NVIDA paper.  The input image size is only slightly different than in the paper (200x60 vs 200x66 px).
+The convolutional filter sizes and number of filters are the same as in the NVIDIA paper.  The input image size is only slightly different than in the paper (200x60 vs 200x66 px).
 
 Because my training data set is three orders of magnitude smaller than the one used by the authors (~minutes vs 72 hours) over-fitting is an issue. To prevent over-fitting I introduce two regularization strategies:
 
-1. All but the last convolutional layer are followed by a 2x2 MaxPool layer. To preserve the layers output sizes the stride in convolutional layers is reduced from two to one. 
+1. All but the last convolutional layer are followed by a 2x2 MaxPool layer. To preserve the layers output sizes, I reduce the stride in convolutional layers from two to one. 
 2. All convolutional layers are followed by a dropout layer. 
 
 In addition to the above changes, the output layer is followed by hyperbolic tangent to limit steering angle predictions to [-1, 1] range.
@@ -77,14 +77,15 @@ The final model architecture ensures that the volumes are decreasing at each lay
 ## Data Preprocessing
 1. Normalize image data to [-0.5, 0.5] range
 2. Resize from 320x160 px to 200x100 px
-3. Crop to 200x60 px. Here I remove part of the image that is above the horizon and not in front of the car.
+3. Crop to 200x60 px. Here, I remove part of the image that is above the horizon and not directly in front of the car.
 
 ## Model Training.
 To train the model I perform a grid search over two hyperparameters:  dropout and number of epochs.
-To evaluate model I test its performance in the simulator and choose parameters that lead to successful self-driving. The resulting dropout is 0.4 and number of epochs is 8. 
+To evaluate model I test its performance in the simulator. 
+The model performs well in the simulator without crashing even after multiple loops with dropout of 0.4 and number of epochs equal to 8. 
 
-I did not use validation set to evaluate the model performance because the data is strongly autocorrelated. Perhaps, better designed validation set , not a simple random sample of the train set could remove some of the autcorrelation and lead to validation errors that reflect car self-driving ability.
+I did not use validation set to evaluate the model performance because the data is strongly autocorrelated. Perhaps, better designed validation set , not a simple random sample of the train set, could remove some of the autcorrelation and lead to validation errors that reflect car self-driving ability.
 
-The model performs well in the simulator without crashing even after multiple loops.
 
-[1] End to End Learning for Self-Driving Cars, NVIDA, 2016, [arXiv:1604.07316][https://arxiv.org/abs/1604.07316]
+
+[1] End to End Learning for Self-Driving Cars, NVIDIA, 2016, [arXiv:1604.07316][https://arxiv.org/abs/1604.07316]
